@@ -89,7 +89,7 @@ mean(hyd)
 
 ### Power analysis formula ----
 
-power.t.test(n=NULL, delta=10, sd=9.6, sig.level=0.05, power=0.95, alternative = "one.sided")
+power.t.test(n=NULL, delta=10, sd=9.6, sig.level=0.05, power=0.95, alternative = "one.sided") 
 
 
 ##!!!!!!********* For next time: ----
