@@ -1,6 +1,9 @@
 ## Power analysis exploration with Lucy
 # 30 January 2019
 
+## Packages ----
+library(pwr)
+
 
 ### Defining questions -----
 
@@ -96,3 +99,21 @@ power.t.test(n=NULL, delta=10, sd=9.6, sig.level=0.05, power=0.95, alternative =
 ## Need to see what power analysis would be required for linear models or other statistical test,
 ## instead of just t-test.
 
+## Linear model power analysis
+# package pwr
+
+pwr.f2.test(u = 3, v = NULL, f2 = 0.3/(1-0.3), sig.level = 0.05, power = 0.95)
+
+
+## example of possible model coefficients?
+# lm(stability of water table ~ time since restoration,location, type of bog,elevation)
+# lm(water table ~ time +dist from drains + elevation + slope)
+
+# u	= degrees of freedom for numerator (the number of coefficients you’ll have in your model (minus the intercept)
+# v = degrees of freedomfor denominator (the number of error degrees of freedom: v=n−u−1. This implies n=v+u+1.)
+# f2 = effect size (For example, if I think my model explains 45% of the variance in my dependent variable, 
+# the effect size is 0.45/(1 - 0.45) ≈ 0.81.)
+# sig.level	= Significance level (Type I error probability)
+# power	= Power of test (1 minus Type II error probability)
+
+# Recall n=v+u+1. Therefore we can us the power analysis to calculate v, and knowing u we can calculate the sample size needed 
