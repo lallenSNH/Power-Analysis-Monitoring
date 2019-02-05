@@ -107,7 +107,8 @@ pwr.f2.test(u = 3, v = NULL, f2 = 0.3/(1-0.3), sig.level = 0.05, power = 0.95)
 
 ## example of possible model coefficients?
 # lm(stability of water table ~ time since restoration,location, type of bog,elevation)
-# lm(water table ~ time +dist from drains + elevation + slope)
+# lm(water table ~ time +dist from drains + elevation + slope) 
+ ## would it be worth including any of these as random effects?
 
 # u	= degrees of freedom for numerator (the number of coefficients you’ll have in your model (minus the intercept)
 # v = degrees of freedomfor denominator (the number of error degrees of freedom: v=n−u−1. This implies n=v+u+1.)
