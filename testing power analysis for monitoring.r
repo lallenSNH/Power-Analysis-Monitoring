@@ -116,4 +116,5 @@ pwr.f2.test(u = 3, v = NULL, f2 = 0.3/(1-0.3), sig.level = 0.05, power = 0.95)
 # sig.level	= Significance level (Type I error probability)
 # power	= Power of test (1 minus Type II error probability)
 
-# Recall n=v+u+1. Therefore we can us the power analysis to calculate v, and knowing u we can calculate the sample size needed 
+# Recall n=v+u+1. Therefore we can us the power analysis to calculate v, and knowing u we can 
+# calculate the sample size needed 
