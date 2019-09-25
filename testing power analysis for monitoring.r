@@ -102,13 +102,16 @@ power.t.test(n=NULL, delta=10, sd=9.6, sig.level=0.05, power=0.95, alternative =
 ## Linear model power analysis
 # package pwr
 
-pwr.f2.test(u = 3, v = NULL, f2 = 0.3/(1-0.3), sig.level = 0.05, power = 0.95)
-
+var <- 0.2 ## variance explained by model
+out <- pwr.f2.test(u = 6, v = NULL, f2 = var/(1-var), sig.level = 0.05, power = 0.95)
+n <- out$v+out$u+1
+n+(n*0.3) # sample size needed, including a 30% loss of samples
 
 ## example of possible model coefficients?
 # lm(stability of water table ~ time since restoration,location, type of bog,elevation)
-# lm(water table ~ time +dist from drains + elevation + slope) 
- ## would it be worth including any of these as random effects?
+
+# lm(water table ~ time + dist from nearest drain + elevation + slope + type of bog + rainfall) 
+ ## would it be worth including any of these as random effects? how do we account for restoration activities?
 
 # u	= degrees of freedom for numerator (the number of coefficients you’ll have in your model (minus the intercept)
 # v = degrees of freedomfor denominator (the number of error degrees of freedom: v=n−u−1. This implies n=v+u+1.)
@@ -119,3 +122,40 @@ pwr.f2.test(u = 3, v = NULL, f2 = 0.3/(1-0.3), sig.level = 0.05, power = 0.95)
 
 # Recall n=v+u+1. Therefore we can us the power analysis to calculate v, and knowing u we can 
 # calculate the sample size needed 
+
+
+
+### HAg erosion monitoring - power analysis ----
+
+# Question/subject - What is the impact of restoration works on peat erosion rates over the first three years post restoration? 
+#   
+# Design - Control (unrestored) vs Impact (restored), over 1 - 3 years post restoration. Multiple sample points on one site with replicates across the country this should (to some extent) eradicate the variables (altitude, region, peatland type). 
+# 
+# Parameter - Hag erosion rate, loss of cm/mm over 3 years post restorations works, one measure taken mid-summer once per year. 
+# 
+# What change are we bothered about, what difference between the control (unrestored) point and impact (restored) point is important? - This I am still trying to narrow down in the literature but we would assume there to be a large change in the figures, that's the whole idea of re-profiling. In which case we could go for a high percentage, so if the impact (restored) point was loss 70% less than the control (unrestored) that would be important to us. 
+
+# What is the purpose of the study and the main endpoint? 
+# to understand if reprofiling affects the rate of hag erosion.
+
+# What is the minimum difference we are interested in detecting?
+# maybe 20cm?
+
+# What is expected in the control group (mean and SD)
+# - range from 0-20, mean 10, sd = 7
+hagerosion <- c(10,20,25,30,20,25,40,30,40,25,15,12,22,29,50,34,60,102,20,33,41)
+sd(hagerosion)
+mean(hagerosion)
+
+# How certain do you want to be of detecting a difference (power)?
+# 80%
+
+# n = number of observations per group
+# delta = true difference in means (minimum significant difference)
+# sd = standard deviation in the data
+# sig.level = significance level (probablility of a false positive, usually p = 0.05)
+# power = power of test (1 - probablity of false negative (not detecting a real difference))
+
+### Power analysis formula ----
+
+power.t.test(n=NULL, delta=20, sd=20.1, sig.level=0.05, power=0.95,alternative = "one.sided")
